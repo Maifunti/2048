@@ -1,0 +1,1417 @@
+<%
+  rubocop_version = Gem.loaded_specs.fetch("rubocop").version
+%>
+
+plugins:
+  - rubocop-shopify
+
+inherit_mode:
+  merge:
+  - Exclude
+  - Include
+
+AllCops:
+  StyleGuideBaseURL: https://shopify.github.io/ruby-style-guide/
+  NewCops: disable # New cops will be triaged by style guide maintainers instead.
+
+# Bundler Department
+Bundler/OrderedGems:
+  Enabled: false
+
+
+# Gemspec Department
+Gemspec/AddRuntimeDependency:
+  Enabled: false
+
+<% if rubocop_version >= '1.77' %>
+Gemspec/AttributeAssignment:
+  Enabled: true
+<% end %>
+
+Gemspec/DeprecatedAttributeAssignment:
+  Enabled: true
+
+Gemspec/DevelopmentDependencies:
+  Enabled: true
+
+Gemspec/OrderedDependencies:
+  Enabled: false
+
+Gemspec/RequireMFA:
+  Enabled: false
+
+Gemspec/RequiredRubyVersion:
+  Enabled: false
+
+
+# Layout Department
+Layout/ArgumentAlignment:
+  EnforcedStyle: with_fixed_indentation
+
+Layout/ArrayAlignment:
+  Enabled: false
+
+Layout/AssignmentIndentation:
+  Enabled: false
+
+Layout/BeginEndAlignment:
+  Enabled: false
+
+Layout/BlockAlignment:
+  Enabled: false
+
+Layout/BlockEndNewline:
+  Enabled: false
+
+Layout/CaseIndentation:
+  Enabled: false
+  EnforcedStyle: end
+
+Layout/ClosingHeredocIndentation:
+  Enabled: false
+
+Layout/EmptyComment:
+  Enabled: false
+
+Layout/EmptyLineAfterGuardClause:
+  Enabled: false
+
+Layout/EmptyLines:
+  Enabled: false
+
+Layout/EndAlignment:
+  Enabled: false
+  EnforcedStyleAlignWith: variable
+
+Layout/ExtraSpacing:
+  Enabled: false
+
+Layout/FirstArgumentIndentation:
+  Enabled: false
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementIndentation:
+  Enabled: false
+  EnforcedStyle: consistent
+
+Layout/FirstArrayElementLineBreak:
+  AllowMultilineFinalElement: true
+
+Layout/FirstHashElementIndentation:
+  Enabled: false
+  EnforcedStyle: consistent
+
+Layout/FirstMethodArgumentLineBreak:
+  AllowMultilineFinalElement: true
+
+Layout/FirstParameterIndentation:
+  Enabled: false
+
+Layout/HashAlignment:
+  Enabled: false
+  EnforcedLastArgumentHashStyle: ignore_implicit
+
+Layout/HeredocIndentation:
+  Enabled: false
+
+Layout/LeadingCommentSpace:
+  AllowRBSInlineAnnotation: true
+
+Layout/LineContinuationLeadingSpace:
+  Enabled: true
+
+Layout/LineContinuationSpacing:
+  Enabled: true
+
+Layout/LineEndStringConcatenationIndentation:
+  Enabled: false
+  EnforcedStyle: indented
+
+Layout/LineLength:
+  Enabled: false
+  AllowedPatterns:
+  - "\\A\\s*(remote_)?test(_\\w+)?\\s.*(do|->)(\\s|\\Z)"
+  - "\\A\\s*def test_\\w+\\s*\\Z"
+
+Layout/MultilineArrayBraceLayout:
+  Enabled: false
+
+Layout/MultilineArrayLineBreaks:
+  AllowMultilineFinalElement: true
+
+Layout/MultilineHashBraceLayout:
+  Enabled: false
+
+Layout/MultilineMethodArgumentLineBreaks:
+  AllowMultilineFinalElement: true
+
+Layout/MultilineMethodCallBraceLayout:
+  Enabled: false
+
+Layout/MultilineMethodCallIndentation:
+  Enabled: false
+
+Layout/MultilineMethodDefinitionBraceLayout:
+  Enabled: false
+
+Layout/MultilineOperationIndentation:
+  Enabled: false
+  EnforcedStyle: indented
+Layout/ParameterAlignment:
+  Enabled: false
+  EnforcedStyle: with_fixed_indentation
+
+Layout/RescueEnsureAlignment:
+  Enabled: false
+
+Layout/SpaceBeforeBrackets:
+  Enabled: true
+
+
+# Lint Department
+Lint/AmbiguousAssignment:
+  Enabled: true
+
+Lint/AmbiguousBlockAssociation:
+  Enabled: false
+
+Lint/AmbiguousOperatorPrecedence:
+  Enabled: false
+
+Lint/AmbiguousRange:
+  Enabled: false
+
+Lint/AmbiguousRegexpLiteral:
+  Enabled: false
+
+Lint/ArrayLiteralInRegexp:
+  Enabled: false
+
+Lint/AssignmentInCondition:
+  Enabled: false
+
+Lint/BooleanSymbol:
+  Enabled: false
+
+Lint/ConstantDefinitionInBlock:
+  Enabled: false
+
+Lint/ConstantOverwrittenInRescue:
+  Enabled: true
+
+Lint/ConstantReassignment:
+  Enabled: true
+
+Lint/CopDirectiveSyntax:
+  Enabled: true
+
+Lint/DeprecatedConstants:
+  Enabled: false
+
+Lint/DuplicateBranch:
+  Enabled: false
+
+Lint/DuplicateMagicComment:
+  Enabled: true
+
+Lint/DuplicateMatchPattern:
+  Enabled: true
+
+Lint/DuplicateRegexpCharacterClassElement:
+  Enabled: true
+
+Lint/DuplicateSetElement:
+  Enabled: true
+
+Lint/EmptyBlock:
+  Enabled: false
+
+Lint/EmptyClass:
+  Enabled: false
+
+Lint/EmptyConditionalBody:
+  Enabled: false
+
+Lint/EmptyFile:
+  Enabled: false
+
+Lint/EmptyInPattern:
+  Enabled: false
+
+Lint/EmptyWhen:
+  Enabled: false
+
+Lint/ErbNewArguments:
+  Enabled: false
+
+Lint/FlipFlop:
+  Enabled: false
+
+Lint/FloatComparison:
+  Enabled: false
+
+Lint/FloatOutOfRange:
+  Enabled: false
+
+Lint/FormatParameterMismatch:
+  Enabled: false
+
+Lint/HashCompareByIdentity:
+  Enabled: false
+
+Lint/HashNewWithKeywordArgumentsAsDefault:
+  Enabled: false
+
+Lint/IdentityComparison:
+  Enabled: false
+
+Lint/IncompatibleIoSelectWithFiberScheduler:
+  Enabled: false
+
+Lint/InheritException:
+  Enabled: false
+
+Lint/ItWithoutArgumentsInBlock:
+  Enabled: false
+
+Lint/LambdaWithoutLiteralBlock:
+  Enabled: false
+
+Lint/LiteralAssignmentInCondition:
+  Enabled: false
+
+Lint/Loop:
+  Enabled: false
+
+Lint/MissingSuper:
+  Enabled: false
+
+Lint/MixedCaseRange:
+  Enabled: true
+
+Lint/MixedRegexpCaptureTypes:
+  Enabled: false
+
+Lint/NoReturnInBeginEndBlocks:
+  Enabled: false
+
+Lint/NonAtomicFileOperation:
+  Enabled: false
+
+Lint/NonDeterministicRequireOrder:
+  Enabled: false
+
+Lint/NonLocalExitFromIterator:
+  Enabled: false
+
+Lint/NumberedParameterAssignment:
+  Enabled: false
+
+Lint/NumericOperationWithConstantResult:
+  Enabled: true
+
+Lint/OrAssignmentToConstant:
+  Enabled: true
+
+Lint/OrderedMagicComments:
+  Enabled: false
+
+Lint/OutOfRangeRegexpRef:
+  Enabled: false
+
+Lint/PercentStringArray:
+  Enabled: false
+
+Lint/PercentSymbolArray:
+  Enabled: false
+
+Lint/RaiseException:
+  Enabled: false
+
+Lint/RandOne:
+  Enabled: false
+
+Lint/RedundantDirGlobSort:
+  Enabled: false
+
+Lint/RedundantRegexpQuantifiers:
+  Enabled: false
+
+Lint/RedundantRequireStatement:
+  Enabled: false
+
+Lint/RedundantSafeNavigation:
+  Enabled: false
+
+Lint/RedundantSplatExpansion:
+  Enabled: false
+
+Lint/RedundantTypeConversion:
+  Enabled: false
+
+Lint/RefinementImportMethods:
+  Enabled: false
+
+Lint/RequireParentheses:
+  Enabled: false
+
+Lint/RequireRangeParentheses:
+  Enabled: false
+
+Lint/RequireRelativeSelfPath:
+  Enabled: false
+
+Lint/RescueException:
+  Enabled: false
+
+Lint/RescueType:
+  Enabled: false
+
+Lint/SafeNavigationConsistency:
+  Enabled: false
+
+Lint/SafeNavigationWithEmpty:
+  Enabled: false
+
+Lint/ScriptPermission:
+  Enabled: false
+
+Lint/ShadowedArgument:
+  Enabled: false
+
+Lint/ShadowedException:
+  Enabled: false
+
+<% if rubocop_version < "1.76" %>
+Lint/ShadowingOuterLocalVariable:
+  Enabled: false
+<% end %>
+
+Lint/SharedMutableDefault:
+  Enabled: false
+
+Lint/StructNewOverride:
+  Enabled: false
+
+Lint/SuppressedException:
+  Enabled: false
+
+Lint/SuppressedExceptionInNumberConversion:
+  Enabled: false
+
+Lint/SymbolConversion:
+  Enabled: false
+
+Lint/ToEnumArguments:
+  Enabled: false
+
+Lint/ToJSON:
+  Enabled: false
+
+Lint/TopLevelReturnWithArgument:
+  Enabled: false
+
+Lint/TripleQuotes:
+  Enabled: true
+
+Lint/UnderscorePrefixedVariableName:
+  Enabled: false
+
+Lint/UnescapedBracketInRegexp:
+  Enabled: false
+
+Lint/UnexpectedBlockArity:
+  Enabled: false
+
+Lint/UnifiedInteger:
+  Enabled: false
+
+Lint/UnmodifiedReduceAccumulator:
+  Enabled: false
+
+Lint/UnreachableCode:
+  Enabled: false
+
+Lint/UnreachableLoop:
+  Enabled: false
+
+Lint/UnusedBlockArgument:
+  Enabled: false
+
+Lint/UnusedMethodArgument:
+  Enabled: false
+
+Lint/UriEscapeUnescape:
+  Enabled: false
+
+Lint/UriRegexp:
+  Enabled: false
+
+Lint/UselessAccessModifier:
+  Enabled: false
+
+Lint/UselessAssignment:
+  Enabled: false
+
+Lint/UselessConstantScoping:
+  Enabled: false
+
+<% if rubocop_version >= "1.76" %>
+Lint/UselessDefaultValueArgument:
+  Enabled: true
+<% end %>
+
+Lint/UselessDefined:
+  Enabled: false
+
+Lint/UselessElseWithoutRescue:
+  Enabled: false
+
+Lint/UselessMethodDefinition:
+  Enabled: false
+
+Lint/UselessNumericOperation:
+  Enabled: false
+
+<% if rubocop_version >= "1.76" %>
+Lint/UselessOr:
+  Enabled: true
+<% end %>
+
+Lint/UselessRescue:
+  Enabled: false
+
+Lint/UselessRuby2Keywords:
+  Enabled: false
+
+Lint/UselessSetterCall:
+  Enabled: false
+
+Lint/UselessTimes:
+  Enabled: false
+
+Lint/Void:
+  Enabled: false
+
+
+# Metrics Department
+Metrics/AbcSize:
+  Enabled: false
+
+Metrics/BlockLength:
+  Enabled: false
+
+Metrics/BlockNesting:
+  Enabled: false
+
+Metrics/ClassLength:
+  Enabled: false
+
+Metrics/CollectionLiteralLength:
+  Enabled: false
+
+Metrics/CyclomaticComplexity:
+  Enabled: false
+
+Metrics/MethodLength:
+  Enabled: false
+
+Metrics/ModuleLength:
+  Enabled: false
+
+Metrics/ParameterLists:
+  Enabled: false
+  CountKeywordArgs: false
+
+Metrics/PerceivedComplexity:
+  Enabled: false
+
+
+# Migration Department
+Migration/DepartmentName:
+  Enabled: false
+
+
+# Naming Department
+Naming/AccessorMethodName:
+  Enabled: false
+
+Naming/AsciiIdentifiers:
+  Enabled: false
+
+Naming/BinaryOperatorParameterName:
+  Enabled: false
+
+Naming/BlockForwarding:
+  Enabled: false
+
+Naming/BlockParameterName:
+  Enabled: false
+
+Naming/ClassAndModuleCamelCase:
+  Enabled: false
+
+Naming/ConstantName:
+  Enabled: false
+
+Naming/FileName:
+  Enabled: false
+
+Naming/HeredocDelimiterCase:
+  Enabled: false
+
+Naming/HeredocDelimiterNaming:
+  Enabled: false
+
+Naming/MemoizedInstanceVariableName:
+  Enabled: false
+
+Naming/MethodName:
+  Enabled: false
+  AllowedPatterns:
+    - '\Atest_'
+
+Naming/MethodParameterName:
+  Enabled: false
+
+<% if rubocop_version >= "1.76" %>
+Naming/PredicateMethod:
+  Enabled: false
+<% end %>
+
+<% if rubocop_version >= "1.76" %>
+Naming/PredicatePrefix:
+<% else %>
+Naming/PredicateName:
+<% end %>
+  Enabled: false
+  NamePrefix:
+  - is_
+  ForbiddenPrefixes:
+  - is_
+
+Naming/RescuedExceptionsVariableName:
+  Enabled: false
+
+Naming/VariableName:
+  Enabled: false
+
+Naming/VariableNumber:
+  Enabled: false
+
+
+# Security Department
+Security/CompoundHash:
+  Enabled: false
+
+Security/Eval:
+  Enabled: false
+
+Security/IoMethods:
+  Enabled: false
+
+Security/JSONLoad:
+  Enabled: false
+
+Security/MarshalLoad:
+  Enabled: false
+
+Security/Open:
+  Enabled: false
+
+Security/YAMLLoad:
+  Enabled: false
+
+
+# Style Department
+Style/AccessModifierDeclarations:
+  Enabled: false
+
+Style/AccessorGrouping:
+  Enabled: false
+
+Style/Alias:
+  Enabled: false
+  EnforcedStyle: prefer_alias_method
+
+Style/AmbiguousEndlessMethodDefinition:
+  Enabled: false
+
+Style/AndOr:
+  Enabled: false
+
+Style/ArgumentsForwarding:
+  Enabled: false
+
+Style/ArrayIntersect:
+  Enabled: false
+
+Style/ArrayJoin:
+  Enabled: false
+
+Style/Attr:
+  Enabled: false
+
+Style/BarePercentLiterals:
+  Enabled: false
+
+Style/BeginBlock:
+  Enabled: false
+
+Style/BisectedAttrAccessor:
+  Enabled: false
+
+Style/BitwisePredicate:
+  Enabled: false
+
+Style/BlockComments:
+  Enabled: false
+
+Style/BlockDelimiters:
+  Enabled: false
+
+Style/CaseEquality:
+  Enabled: false
+  AllowOnConstant: true
+  AllowOnSelfClass: true
+
+Style/CaseLikeIf:
+  Enabled: false
+
+Style/CharacterLiteral:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/ClassCheck:
+  Enabled: false
+
+Style/ClassEqualityComparison:
+  Enabled: false
+
+Style/ClassMethods:
+  Enabled: false
+
+Style/ClassMethodsDefinitions:
+  EnforcedStyle: self_class
+
+Style/ClassVars:
+  Enabled: false
+
+Style/CollectionCompact:
+  Enabled: false
+
+<% if rubocop_version >= '1.77' %>
+Style/CollectionQuerying:
+  Enabled: true
+<% end %>
+
+Style/ColonMethodCall:
+  Enabled: false
+
+Style/ColonMethodDefinition:
+  Enabled: false
+
+Style/CombinableDefined:
+  Enabled: false
+
+Style/CombinableLoops:
+  Enabled: false
+
+Style/CommandLiteral:
+  Enabled: false
+  EnforcedStyle: percent_x
+
+Style/CommentAnnotation:
+  Enabled: false
+
+Style/CommentedKeyword:
+  Enabled: false
+
+<% if rubocop_version >= "1.74" %>
+Style/ComparableBetween:
+  Enabled: false
+<% end %>
+
+Style/ComparableClamp:
+  Enabled: false
+
+Style/ConcatArrayLiterals:
+  Enabled: false
+
+Style/ConditionalAssignment:
+  Enabled: false
+
+Style/DataInheritance:
+  Enabled: false
+
+Style/DefWithParentheses:
+  Enabled: false
+
+Style/DigChain:
+  Enabled: false
+
+Style/Dir:
+  Enabled: false
+
+Style/DirEmpty:
+  Enabled: false
+
+Style/DocumentDynamicEvalDefinition:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/DoubleCopDisableDirective:
+  Enabled: false
+
+Style/DoubleNegation:
+  Enabled: false
+
+Style/EachForSimpleLoop:
+  Enabled: false
+
+Style/EachWithObject:
+  Enabled: false
+
+Style/EmptyBlockParameter:
+  Enabled: false
+
+Style/EmptyCaseCondition:
+  Enabled: false
+
+Style/EmptyElse:
+  Enabled: false
+  AllowComments: true
+
+Style/EmptyHeredoc:
+  Enabled: false
+
+Style/EmptyLambdaParameter:
+  Enabled: false
+
+Style/EmptyLiteral:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+<% if rubocop_version >= "1.76" %>
+Style/EmptyStringInsideInterpolation:
+  Enabled: false
+<% end %>
+
+Style/Encoding:
+  Enabled: false
+
+Style/EndBlock:
+  Enabled: false
+
+Style/EndlessMethod:
+  Enabled: false
+
+Style/EnvHome:
+  Enabled: false
+
+Style/EvalWithLocation:
+  Enabled: false
+
+Style/EvenOdd:
+  Enabled: false
+
+Style/ExactRegexpMatch:
+  Enabled: false
+
+Style/ExpandPathArguments:
+  Enabled: false
+
+Style/ExplicitBlockArgument:
+  Enabled: false
+
+Style/ExponentialNotation:
+  Enabled: false
+
+Style/FetchEnvVar:
+  Enabled: false
+
+Style/FileEmpty:
+  Enabled: false
+
+Style/FileNull:
+  Enabled: false
+
+Style/FileRead:
+  Enabled: false
+
+Style/FileTouch:
+  Enabled: false
+
+Style/FileWrite:
+  Enabled: false
+
+Style/FloatDivision:
+  Enabled: false
+
+Style/For:
+  Enabled: false
+
+Style/FormatString:
+  Enabled: false
+
+Style/FormatStringToken:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  SafeAutoCorrect: true
+  EnforcedStyle: always_true
+  Details: 'Add `# frozen_string_literal: true` to the top of the file. Frozen string
+    literals will become the default in a future Ruby version, and we want to make
+    sure we''re ready.'
+
+Style/GlobalStdStream:
+  Enabled: false
+
+Style/GlobalVars:
+  Enabled: false
+
+Style/GuardClause:
+  Enabled: false
+
+Style/HashAsLastArrayItem:
+  Enabled: false
+
+Style/HashConversion:
+  Enabled: false
+
+Style/HashEachMethods:
+  Enabled: false
+
+Style/HashExcept:
+  Enabled: false
+
+<% if rubocop_version >= "1.75" %>
+Style/HashFetchChain:
+  Enabled: false
+<% end %>
+
+Style/HashLikeCase:
+  Enabled: false
+
+Style/HashSlice:
+  Enabled: false
+
+Style/HashSyntax:
+  Enabled: false
+
+Style/HashTransformKeys:
+  Enabled: false
+
+Style/HashTransformValues:
+  Enabled: false
+
+Style/IdenticalConditionalBranches:
+  Enabled: false
+
+Style/IfInsideElse:
+  Enabled: false
+
+Style/IfUnlessModifier:
+  Enabled: false
+
+Style/IfUnlessModifierOfIfUnless:
+  Enabled: false
+
+Style/IfWithBooleanLiteralBranches:
+  Enabled: false
+
+Style/IfWithSemicolon:
+  Enabled: false
+
+Style/InPatternThen:
+  Enabled: false
+
+Style/InfiniteLoop:
+  Enabled: false
+
+Style/InverseMethods:
+  Enabled: false
+
+Style/ItAssignment:
+  Enabled: false
+
+<% if rubocop_version >= "1.75" %>
+Style/ItBlockParameter:
+  Enabled: false
+<% end %>
+
+Style/KeywordArgumentsMerging:
+  Enabled: false
+
+Style/KeywordParametersOrder:
+  Enabled: false
+
+Style/Lambda:
+  Enabled: false
+
+Style/LambdaCall:
+  Enabled: false
+
+Style/LineEndConcatenation:
+  Enabled: false
+
+Style/MagicCommentFormat:
+  Enabled: false
+  ValueCapitalization: lowercase
+
+Style/MapCompactWithConditionalBlock:
+  Enabled: false
+
+Style/MapIntoArray:
+  Enabled: false
+
+Style/MapToHash:
+  Enabled: false
+
+Style/MapToSet:
+  Enabled: false
+
+Style/MethodCallWithArgsParentheses:
+  AllowedMethods:
+  - require
+  - require_relative
+  - require_dependency
+  - yield
+  - raise
+  - puts
+  Exclude:
+  - "/**/Gemfile"
+
+Style/MethodCallWithoutArgsParentheses:
+  Enabled: false
+
+Style/MethodDefParentheses:
+  Enabled: false
+
+Style/MinMax:
+  Enabled: false
+
+Style/MinMaxComparison:
+  Enabled: false
+
+Style/MissingRespondToMissing:
+  Enabled: false
+
+Style/MixinGrouping:
+  Enabled: false
+
+Style/MixinUsage:
+  Enabled: false
+
+Style/ModuleFunction:
+  Enabled: false
+  EnforcedStyle: extend_self
+
+Style/MultilineBlockChain:
+  Enabled: false
+
+Style/MultilineIfModifier:
+  Enabled: false
+
+Style/MultilineIfThen:
+  Enabled: false
+
+Style/MultilineInPatternThen:
+  Enabled: false
+
+Style/MultilineMemoization:
+  Enabled: false
+
+Style/MultilineTernaryOperator:
+  Enabled: false
+
+Style/MultilineWhenThen:
+  Enabled: false
+
+Style/MultipleComparison:
+  Enabled: false
+
+Style/NegatedIf:
+  Enabled: false
+
+Style/NegatedIfElseCondition:
+  Enabled: false
+
+Style/NegatedUnless:
+  Enabled: false
+
+Style/NegatedWhile:
+  Enabled: false
+
+Style/NestedFileDirname:
+  Enabled: false
+
+Style/NestedModifier:
+  Enabled: false
+
+Style/NestedParenthesizedCalls:
+  Enabled: false
+
+Style/NestedTernaryOperator:
+  Enabled: false
+
+Style/Next:
+  Enabled: false
+
+Style/NilComparison:
+  Enabled: false
+
+Style/NilLambda:
+  Enabled: false
+
+Style/NonNilCheck:
+  Enabled: false
+
+Style/Not:
+  Enabled: false
+
+Style/NumberedParameters:
+  Enabled: false
+
+Style/NumberedParametersLimit:
+  Enabled: false
+
+Style/NumericLiteralPrefix:
+  Enabled: false
+
+Style/NumericLiterals:
+  Enabled: false
+
+Style/NumericPredicate:
+  Enabled: false
+
+Style/ObjectThen:
+  Enabled: false
+
+Style/OneLineConditional:
+  Enabled: false
+
+Style/OpenStructUse:
+  Enabled: false
+
+Style/OperatorMethodCall:
+  Enabled: false
+
+Style/OptionalArguments:
+  Enabled: false
+
+Style/OptionalBooleanParameter:
+  Enabled: false
+
+Style/OrAssignment:
+  Enabled: false
+
+Style/ParallelAssignment:
+  Enabled: false
+
+Style/ParenthesesAroundCondition:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  Enabled: false
+
+Style/PercentQLiterals:
+  Enabled: false
+
+Style/PerlBackrefs:
+  Enabled: false
+
+Style/PreferredHashMethods:
+  Enabled: false
+
+Style/Proc:
+  Enabled: false
+
+Style/QuotedSymbols:
+  Enabled: false
+
+Style/RaiseArgs:
+  Enabled: false
+Style/RandomWithOffset:
+  Enabled: false
+
+Style/RedundantArgument:
+  Enabled: false
+
+Style/RedundantArrayConstructor:
+  Enabled: false
+
+<% if rubocop_version >= "1.76" %>
+Style/RedundantArrayFlatten:
+  Enabled: true
+<% end %>
+
+Style/RedundantAssignment:
+  Enabled: false
+
+Style/RedundantBegin:
+  Enabled: false
+
+Style/RedundantCapitalW:
+  Enabled: false
+
+Style/RedundantCondition:
+  Enabled: false
+
+Style/RedundantConditional:
+  Enabled: false
+
+Style/RedundantConstantBase:
+  Enabled: false
+
+Style/RedundantCurrentDirectoryInPath:
+  Enabled: false
+
+Style/RedundantDoubleSplatHashBraces:
+  Enabled: false
+
+Style/RedundantEach:
+  Enabled: false
+
+Style/RedundantException:
+  Enabled: false
+
+Style/RedundantFetchBlock:
+  Enabled: false
+
+Style/RedundantFileExtensionInRequire:
+  Enabled: false
+
+Style/RedundantFilterChain:
+  Enabled: false
+
+Style/RedundantFormat:
+  Enabled: false
+
+Style/RedundantFreeze:
+  Enabled: false
+
+Style/RedundantHeredocDelimiterQuotes:
+  Enabled: false
+
+Style/RedundantInitialize:
+  Enabled: false
+
+Style/RedundantInterpolation:
+  Enabled: false
+
+Style/RedundantInterpolationUnfreeze:
+  Enabled: false
+
+Style/RedundantLineContinuation:
+  Enabled: false
+
+Style/RedundantParentheses:
+  Enabled: false
+
+Style/RedundantPercentQ:
+  Enabled: false
+
+Style/RedundantRegexpArgument:
+  Enabled: false
+
+Style/RedundantRegexpCharacterClass:
+  Enabled: false
+
+Style/RedundantRegexpConstructor:
+  Enabled: false
+
+Style/RedundantRegexpEscape:
+  Enabled: false
+
+Style/RedundantReturn:
+  Enabled: false
+
+Style/RedundantSelf:
+  Enabled: false
+
+Style/RedundantSelfAssignment:
+  Enabled: false
+
+Style/RedundantSelfAssignmentBranch:
+  Enabled: false
+
+Style/RedundantSort:
+  Enabled: false
+
+Style/RedundantSortBy:
+  Enabled: false
+
+Style/RedundantStringEscape:
+  Enabled: false
+
+Style/RegexpLiteral:
+  Enabled: false
+  EnforcedStyle: mixed
+
+Style/RescueModifier:
+  Enabled: false
+
+Style/RescueStandardError:
+  Enabled: false
+
+Style/ReturnNilInPredicateMethodDefinition:
+  Enabled: false
+
+Style/SafeNavigation:
+  Enabled: false
+
+Style/SafeNavigationChainLength:
+  Enabled: false
+
+Style/Sample:
+  Enabled: false
+
+Style/SelectByRegexp:
+  Enabled: false
+
+Style/SelfAssignment:
+  Enabled: false
+
+Style/Semicolon:
+  Enabled: false
+
+Style/SendWithLiteralMethodName:
+  Enabled: false
+
+Style/SignalException:
+  Enabled: false
+
+Style/SingleArgumentDig:
+  Enabled: false
+
+Style/SingleLineDoEndBlock:
+  Enabled: false
+
+Style/SingleLineMethods:
+  Enabled: false
+
+Style/SlicingWithRange:
+  Enabled: false
+
+Style/SoleNestedConditional:
+  Enabled: false
+
+Style/SpecialGlobalVars:
+  Enabled: false
+
+Style/StabbyLambdaParentheses:
+  Enabled: false
+
+Style/StderrPuts:
+  Enabled: false
+
+Style/StringChars:
+  Enabled: false
+
+Style/StringConcatenation:
+  Enabled: false
+
+Style/StringLiterals:
+  Enabled: false
+  EnforcedStyle: double_quotes
+
+Style/StringLiteralsInInterpolation:
+  Enabled: false
+  EnforcedStyle: double_quotes
+
+Style/Strip:
+  Enabled: false
+
+Style/StructInheritance:
+  Enabled: false
+
+Style/SuperArguments:
+  Enabled: false
+
+Style/SuperWithArgsParentheses:
+  Enabled: false
+
+Style/SwapValues:
+  Enabled: false
+
+Style/SymbolArray:
+  Enabled: false
+  EnforcedStyle: brackets
+
+Style/SymbolLiteral:
+  Enabled: false
+
+Style/SymbolProc:
+  Enabled: false
+
+Style/TernaryParentheses:
+  Enabled: false
+
+Style/TrailingBodyOnClass:
+  Enabled: false
+
+Style/TrailingBodyOnMethodDefinition:
+  Enabled: false
+
+Style/TrailingBodyOnModule:
+  Enabled: false
+
+Style/TrailingCommaInArguments:
+  Enabled: false
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInArrayLiteral:
+  Enabled: false
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingCommaInHashLiteral:
+  Enabled: false
+  EnforcedStyleForMultiline: consistent_comma
+
+Style/TrailingMethodEndStatement:
+  Enabled: false
+
+Style/TrailingUnderscoreVariable:
+  Enabled: false
+
+Style/TrivialAccessors:
+  Enabled: false
+
+Style/UnlessElse:
+  Enabled: false
+
+Style/UnpackFirst:
+  Enabled: false
+
+Style/VariableInterpolation:
+  Enabled: false
+
+Style/WhenThen:
+  Enabled: false
+
+Style/WhileUntilDo:
+  Enabled: false
+
+Style/WhileUntilModifier:
+  Enabled: false
+
+Style/WordArray:
+  Enabled: false
+  EnforcedStyle: brackets
+
+Style/YAMLFileRead:
+  Enabled: false
+
+Style/YodaCondition:
+  Enabled: false
+
+Style/ZeroLengthPredicate:
+  Enabled: false
+

@@ -1,0 +1,9 @@
+#!/usr/bin/env ruby
+# frozen_string_literal: true
+
+require 'twenty_48'
+require 'bundler/setup'
+Bundler.require
+
+driver = ARGV[0]
+Twenty48.launch(driver)

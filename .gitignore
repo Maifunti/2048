@@ -1,0 +1,4 @@
+/.idea
+coverage/
+.byebug_history
+config.yml
