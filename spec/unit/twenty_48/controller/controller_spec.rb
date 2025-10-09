@@ -256,14 +256,14 @@ describe Twenty48::Controller do
     end
 
     #  - - - -
-    #  2 - 2 -
+    #  8 - 8 -
     #  - - - -
     #  - - - -
     context 'merge candidates' do
       let(:board_state) do
         [
           [nil, nil, nil, nil],
-          [2, nil, 2, nil],
+          [8, nil, 8, nil],
           [nil, nil, nil, nil],
           [nil, nil, nil, nil],
         ].flatten
@@ -273,7 +273,7 @@ describe Twenty48::Controller do
         expect { merge_left }.to change { controller.board_state }.to(
           [
             [nil, nil, nil, nil],
-            [4, nil, nil, nil],
+            [16, nil, nil, nil],
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
           ].flatten
@@ -458,14 +458,14 @@ describe Twenty48::Controller do
     end
 
     #  - - - -
-    #  2 - 2 -
+    #  8 - 8 -
     #  - - - -
     #  - - - -
     context 'merge candidates' do
       let(:board_state) do
         [
           [nil, nil, nil, nil],
-          [2, nil, 2, nil],
+          [8, nil, 8, nil],
           [nil, nil, nil, nil],
           [nil, nil, nil, nil],
         ].flatten
@@ -475,7 +475,7 @@ describe Twenty48::Controller do
         expect { merge_right }.to change { controller.board_state }.to(
           [
             [nil, nil, nil, nil],
-            [nil, nil, nil, 4],
+            [nil, nil, nil, 16],
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
           ].flatten
@@ -484,14 +484,14 @@ describe Twenty48::Controller do
     end
 
     #  - - - -
-    #  - 2 - 2
+    #  - 8 - 8
     #  - - - -
     #  - - - -
     context 'merge candidates' do
       let(:board_state) do
         [
           [nil, nil, nil, nil],
-          [nil, 2, nil, 2],
+          [nil, 8, nil, 8],
           [nil, nil, nil, nil],
           [nil, nil, nil, nil],
         ].flatten
@@ -501,7 +501,7 @@ describe Twenty48::Controller do
         expect { merge_right }.to change { controller.board_state }.to(
           [
             [nil, nil, nil, nil],
-            [nil, nil, nil, 4],
+            [nil, nil, nil, 16],
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
           ].flatten
@@ -659,16 +659,16 @@ describe Twenty48::Controller do
       end
     end
 
-    #  - 2 - -
+    #  - 8 - -
     #  - - - -
-    #  - 2 - -
+    #  - 8 - -
     #  - - - -
     context 'merge candidates' do
       let(:board_state) do
         [
-          [nil, 2, nil, nil],
+          [nil, 8, nil, nil],
           [nil, nil, nil, nil],
-          [nil, 2, nil, nil],
+          [nil, 8, nil, nil],
           [nil, nil, nil, nil],
         ].flatten
       end
@@ -676,7 +676,7 @@ describe Twenty48::Controller do
       it 'merges successfully' do
         expect { merge_up }.to change { controller.board_state }.to(
           [
-            [nil, 4, nil, nil],
+            [nil, 16, nil, nil],
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
@@ -861,16 +861,16 @@ describe Twenty48::Controller do
       end
     end
 
-    #  - 2 - -
+    #  - 8 - -
     #  - - - -
-    #  - 2 - -
+    #  - 8 - -
     #  - - - -
     context 'merge candidates' do
       let(:board_state) do
         [
-          [nil, 2, nil, nil],
+          [nil, 8, nil, nil],
           [nil, nil, nil, nil],
-          [nil, 2, nil, nil],
+          [nil, 8, nil, nil],
           [nil, nil, nil, nil],
         ].flatten
       end
@@ -881,7 +881,7 @@ describe Twenty48::Controller do
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
             [nil, nil, nil, nil],
-            [nil, 4, nil, nil],
+            [nil, 16, nil, nil],
           ].flatten
         )
       end

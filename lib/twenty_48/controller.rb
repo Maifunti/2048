@@ -138,7 +138,7 @@ module Twenty48
           (1...BOARD_CELL_Y_COUNT).each_with_index do |row_diff|
             candidate_cell_index = cell_index - (row_diff * BOARD_CELL_X_COUNT)
             if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] * board_state[cell_index]
+              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
               board_state[candidate_cell_index] = nil
               updated = true
               break
@@ -178,7 +178,7 @@ module Twenty48
             candidate_cell_index = cell_index - (row_diff * BOARD_CELL_Y_COUNT)
 
             if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] * board_state[cell_index]
+              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
               board_state[candidate_cell_index] = nil
               updated = true
               break
@@ -218,7 +218,7 @@ module Twenty48
             candidate_cell_index = cell_index + column_diff
 
             if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] * board_state[cell_index]
+              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
               board_state[candidate_cell_index] = nil
               updated = true
               break
@@ -258,7 +258,7 @@ module Twenty48
             candidate_cell_index = cell_index - column_diff
 
             if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] * board_state[cell_index]
+              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
               board_state[candidate_cell_index] = nil
               updated = true
               break
