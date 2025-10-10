@@ -15,13 +15,13 @@ module Twenty48
     end
 
     def get_value(x, y)
-      raise if outside?(x, y)
+      raise 'value is outside canvas' if outside?(x, y)
 
       data[y][x]
     end
 
     def set_value(x, y, char)
-      raise if char.length > 1
+      raise 'char length is greater than 1' if char.length > 1
 
       data[y][x] = char
     end

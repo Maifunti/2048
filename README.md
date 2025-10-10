@@ -64,5 +64,3 @@ Provided as a fallback if facing compatibility issues using libncurses
 # Known Issues
 * dynamic resizing is broken for users on windows consoles https://github.com/PowerShell/PowerShell/issues/8975.
 avoid resizing console window or use terminal_paint --basic 
-* dynamic resizing is partially broken using the --tty-cursor display driver. Users can hit any key after resizing their terminal window to fix a corrupt display.
-The issue is caused by the way ruby delivers signal interrupts. There is no simple fix for the issue outside of making the application multi-threaded. I've forgone that for this release.

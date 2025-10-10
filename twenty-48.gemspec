@@ -25,10 +25,10 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = '~> 3.1'
 
   # this dependency is optional
-  # spec.add_dependency('curses', '1.2.7')
   spec.add_dependency('tty-cursor', '~> 0.7')
   spec.add_dependency('tty-reader', '~> 0.9')
   spec.add_dependency('tty-screen', '~> 0.8')
   spec.add_dependency('httparty', '~> 0.23')
   spec.add_dependency('zeitwerk')
+  spec.add_dependency('concurrent-ruby')
 end

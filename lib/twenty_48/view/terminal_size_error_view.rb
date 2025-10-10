@@ -4,7 +4,7 @@ module Twenty48
   module View
     class TerminalSizeErrorView
       TEXT = "Your terminal size %{display_width}x%{display_height} is smaller than the minimum required" \
-        " %{required_width}x%{required_height}. Please resize your terminal"
+        " %{required_width}x%{required_height}.\n\n\nPlease resize your terminal"
 
       attr_accessor :canvas, :required_width, :required_height
 
@@ -20,7 +20,7 @@ module Twenty48
       def render(display_width, display_height)
         text = format(TEXT, display_width: display_width, display_height: display_height,
                       required_width: required_width, required_height: required_height)
-        puts text
+        Draw::PaintText.print(canvas, 0, 0, text)
       end
     end
   end
