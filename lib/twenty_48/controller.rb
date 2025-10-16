@@ -136,11 +136,16 @@ module Twenty48
 
           #  merge cells upwards
           (1...BOARD_CELL_Y_COUNT).each_with_index do |row_diff|
-            candidate_cell_index = cell_index - (row_diff * BOARD_CELL_X_COUNT)
-            if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
-              board_state[candidate_cell_index] = nil
-              updated = true
+            candidate_cell_index = cell_index + (row_diff * BOARD_CELL_X_COUNT)
+            break if candidate_cell_index >= TOTAL_CELL_COUNT
+
+            if board_state[candidate_cell_index]
+              if board_state[cell_index] == board_state[candidate_cell_index]
+                board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
+                board_state[candidate_cell_index] = nil
+                updated = true
+              end
+
               break
             end
           end
@@ -176,11 +181,15 @@ module Twenty48
           #  merge cells downwards
           (1...BOARD_CELL_Y_COUNT).each_with_index do |row_diff|
             candidate_cell_index = cell_index - (row_diff * BOARD_CELL_Y_COUNT)
+            break if candidate_cell_index < 0
 
-            if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
-              board_state[candidate_cell_index] = nil
-              updated = true
+            if board_state[candidate_cell_index]
+              if board_state[cell_index] == board_state[candidate_cell_index]
+                board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
+                board_state[candidate_cell_index] = nil
+                updated = true
+              end
+
               break
             end
           end
@@ -217,10 +226,13 @@ module Twenty48
           ((current_column + 1)...BOARD_CELL_X_COUNT).each_with_index do |column_diff|
             candidate_cell_index = cell_index + column_diff
 
-            if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
-              board_state[candidate_cell_index] = nil
-              updated = true
+            if board_state[candidate_cell_index]
+              if board_state[cell_index] == board_state[candidate_cell_index]
+                board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
+                board_state[candidate_cell_index] = nil
+                updated = true
+              end
+
               break
             end
           end
@@ -257,10 +269,13 @@ module Twenty48
           (1..current_column).each_with_index do |column_diff|
             candidate_cell_index = cell_index - column_diff
 
-            if board_state[cell_index] && board_state[candidate_cell_index] && board_state[cell_index] == board_state[candidate_cell_index]
-              board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
-              board_state[candidate_cell_index] = nil
-              updated = true
+            if board_state[candidate_cell_index]
+              if board_state[cell_index] == board_state[candidate_cell_index]
+                board_state[cell_index] = board_state[candidate_cell_index] + board_state[cell_index]
+                board_state[candidate_cell_index] = nil
+                updated = true
+              end
+
               break
             end
           end

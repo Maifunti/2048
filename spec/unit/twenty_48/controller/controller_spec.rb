@@ -332,6 +332,25 @@ describe Twenty48::Controller do
         )
       end
     end
+
+    #  - - - - -
+    #  2 8 2 - -
+    #  - - - - -
+    #  - - - - -
+    context 'merge candidates' do
+      let(:board_state) do
+        [
+          [nil, nil, nil, nil],
+          [2,   8,   2, nil],
+          [nil, nil, nil, nil],
+          [nil, nil, nil, nil],
+        ].flatten
+      end
+
+      it 'does nothing' do
+        expect { merge_left }.to_not change { controller.board_state }
+      end
+    end
   end
 
   describe 'merge right' do
@@ -532,6 +551,25 @@ describe Twenty48::Controller do
             [nil, nil, nil, 2],
           ].flatten
         )
+      end
+    end
+
+    #  - - - - -
+    #  2 8 2 - -
+    #  - - - - -
+    #  - - - - -
+    context 'merge candidates' do
+      let(:board_state) do
+        [
+          [nil, nil, nil, nil],
+          [nil, 2,   8,   2],
+          [nil, nil, nil, nil],
+          [nil, nil, nil, nil],
+        ].flatten
+      end
+
+      it 'does nothing' do
+        expect { merge_right }.to_not change { controller.board_state }
       end
     end
   end
@@ -736,6 +774,25 @@ describe Twenty48::Controller do
         )
       end
     end
+
+    #  - 2 - - -
+    #  - 8 - - -
+    #  - 2 - - -
+    #  - - - - -
+    context 'merge candidates' do
+      let(:board_state) do
+        [
+          [nil, 2,   nil, nil],
+          [nil, 8,   nil, nil],
+          [nil, 2,   nil, nil],
+          [nil, nil, nil, nil],
+        ].flatten
+      end
+
+      it 'does nothing' do
+        expect { merge_up }.to_not change { controller.board_state }
+      end
+    end
   end
 
   describe 'merge down' do
@@ -936,6 +993,25 @@ describe Twenty48::Controller do
             [2,   4,   2,   2],
           ].flatten
         )
+      end
+    end
+
+    #  - - - - -
+    #  - 2 - - -
+    #  - 8 - - -
+    #  - 2 - - -
+    context 'merge candidates' do
+      let(:board_state) do
+        [
+          [nil, nil, nil, nil],
+          [nil, 2,   nil, nil],
+          [nil, 8, nil, nil],
+          [nil, 2, nil, nil],
+        ].flatten
+      end
+
+      it 'does nothing' do
+        expect { merge_down }.to_not change { controller.board_state }
       end
     end
   end
