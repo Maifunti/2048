@@ -105,9 +105,10 @@ module Twenty48
     def move
       old_state = board_state.dup
       updated = yield
-      history.push old_state if updated
-
-      generate_new_cell
+      if updated
+        history.push old_state
+        generate_new_cell
+      end
       detect_end_game
     end
 

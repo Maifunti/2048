@@ -7,13 +7,37 @@ describe Twenty48::Controller do
   let(:controller) { Twenty48::Controller.new initial_state: board_state, disable_cell_generation: disable_cell_generation }
 
   describe 'generating new cell after move' do
-    let(:board_state) { Array.new(Twenty48::Controller::TOTAL_CELL_COUNT) }
-
     before { stub_const 'Twenty48::Controller::GENERATED_VALUES', [2] }
 
-    it 'generates a "2" || "4" after move' do
-      expect { controller.process('↑') }.to change { controller.board_state.compact.empty? }.to false
-      expect(controller.board_state.compact.first).to eq 2
+    context 'board state did not change' do
+      let(:board_state) do
+        [
+          [2,   4,   6,   8],
+          [nil, nil, nil, nil],
+          [nil, nil, nil, nil],
+          [nil, nil, nil, nil],
+        ].flatten
+      end
+
+      it 'does nothing' do
+        expect { controller.process('←') }.to_not change { controller.board_state.compact.count }.from 4
+      end
+    end
+
+    context 'board state changed' do
+      let(:board_state) do
+        [
+          [nil, 2,   nil, nil],
+          [nil, nil, nil, nil],
+          [nil, nil, nil, nil],
+          [nil, nil, nil, nil],
+        ].flatten
+      end
+
+      it 'generates a "2" || "4" after move' do
+        expect { controller.process('←') }.to change { controller.board_state.compact.count }.to 2
+        expect(controller.board_state.compact.first).to eq 2
+      end
     end
   end
 
