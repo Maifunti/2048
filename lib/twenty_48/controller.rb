@@ -223,8 +223,8 @@ module Twenty48
           next unless board_state[cell_index]
 
           #  merge cells
-          ((current_column + 1)...BOARD_CELL_X_COUNT).each_with_index do |column_diff|
-            candidate_cell_index = cell_index + column_diff
+          ((current_column + 1)...BOARD_CELL_X_COUNT).each_with_index do |candidate_column|
+            candidate_cell_index = cell_index + (candidate_column - current_column)
 
             if board_state[candidate_cell_index]
               if board_state[cell_index] == board_state[candidate_cell_index]
