@@ -352,7 +352,9 @@ module Twenty48
         end
       end
 
-      if !board_move_available
+      if board_move_available
+        self.status = PLAYING
+      else
         self.status = DEFEAT
       end
     end
