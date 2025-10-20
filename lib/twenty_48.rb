@@ -33,9 +33,9 @@ module Twenty48
     ↓               Down
     ←               Left
     →               Right
-    U               Undo
-    N               New
-    Q               Quit
+    U <⏎>           Undo
+    N <⏎>            New
+    Q <⏎>           Quit
 
   QUOTE
   PROMPT = "> "
