@@ -3,7 +3,7 @@ require 'justify'
 module Twenty48
   module View
     class HintLoadingView
-      HEADER = "Thinking... (press Esc to cancel)"
+      HEADER = "Thinking... (press Esc to dismiss)"
       PADDING = 2
 
       attr_accessor :canvas, :width, :height, :x_pos, :y_pos

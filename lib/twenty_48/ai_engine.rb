@@ -1,6 +1,6 @@
 module Twenty48
   class AiEngine
-    SYSTEM = "You are playing a game of 2048. The current board state is: [%s]"
+    SYSTEM = "You are playing a game of 2048. The current board state is:\n\n\n%s"
     USER = "What is the optimal next move? Return only: UP, DOWN, LEFT, or RIGHT"
 
     attr_accessor :board_state, :callback, :client, :hint
@@ -19,7 +19,7 @@ module Twenty48
 
     def fetch
       board_state_string = board_state.each_slice(Twenty48::BOARD_CELL_X_COUNT).map do |row|
-        row.map { |cell| cell || "" }
+        row.map { |cell| cell || "null" }.join(',')
       end.join("\n")
       system = SYSTEM % board_state_string
       self.hint = ''

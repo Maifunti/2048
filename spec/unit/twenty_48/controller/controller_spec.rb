@@ -1124,7 +1124,7 @@ describe Twenty48::Controller do
     let(:listener) { double(invalidate: true) }
     let(:board_state) do
       [
-        [2,   4,   6,   8],
+        [2,   4,   8,   8],
         [nil, nil, nil, nil],
         [nil, nil, nil, nil],
         [nil, nil, nil, nil],
