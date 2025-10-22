@@ -4,7 +4,10 @@ require 'twenty_48/controller'
 
 describe Twenty48::Controller do
   let(:disable_cell_generation) { false }
-  let(:controller) { Twenty48::Controller.new initial_state: board_state, disable_cell_generation: disable_cell_generation }
+  let(:listener) { nil }
+  let(:controller) {
+    Twenty48::Controller.new listener, initial_state: board_state, disable_cell_generation: disable_cell_generation
+  }
 
   describe 'generating new cell after move' do
     before { stub_const 'Twenty48::Controller::GENERATED_VALUES', [2] }
@@ -20,7 +23,7 @@ describe Twenty48::Controller do
       end
 
       it 'does nothing' do
-        expect { controller.process('←') }.to_not change { controller.board_state.compact.count }.from 4
+        expect { controller.process(Twenty48::UserInput.command('←')) }.to_not change { controller.board_state.compact.count }.from 4
       end
     end
 
@@ -35,7 +38,7 @@ describe Twenty48::Controller do
       end
 
       it 'generates a "2" || "4" after move' do
-        expect { controller.process('←') }.to change { controller.board_state.compact.count }.to 2
+        expect { controller.process(Twenty48::UserInput.command('←')) }.to change { controller.board_state.compact.count }.to 2
         expect(controller.board_state.compact.first).to eq 2
       end
     end
@@ -160,7 +163,7 @@ describe Twenty48::Controller do
   describe 'merge left' do
     let(:disable_cell_generation) { true }
 
-    subject(:merge_left) { controller.process('←') }
+    subject(:merge_left) { controller.process(Twenty48::UserInput.command('←')) }
 
     # requirements example
     #  - 8 2 2
@@ -399,7 +402,7 @@ describe Twenty48::Controller do
   describe 'merge right' do
     let(:disable_cell_generation) { true }
 
-    subject(:merge_right) { controller.process('→') }
+    subject(:merge_right) { controller.process(Twenty48::UserInput.command('→')) }
 
 
     # requirements example
@@ -639,7 +642,7 @@ describe Twenty48::Controller do
   describe 'merge up' do
     let(:disable_cell_generation) { true }
 
-    subject(:merge_up) { controller.process('↑') }
+    subject(:merge_up) { controller.process(Twenty48::UserInput.command('↑')) }
 
 
     # requirements example
@@ -879,7 +882,7 @@ describe Twenty48::Controller do
   describe 'merge down' do
     let(:disable_cell_generation) { true }
 
-    subject(:merge_down) { controller.process('↓') }
+    subject(:merge_down) { controller.process(Twenty48::UserInput.command('↓')) }
 
 
     # requirements example
@@ -1114,6 +1117,32 @@ describe Twenty48::Controller do
       it 'does nothing' do
         expect { merge_down }.to_not change { controller.board_state }
       end
+    end
+  end
+
+  describe 'hint' do
+    let(:listener) { double(invalidate: true) }
+    let(:board_state) do
+      [
+        [2,   4,   6,   8],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+        [nil, nil, nil, nil],
+      ].flatten
+    end
+
+    subject { controller.process Twenty48::UserInput.command('H') }
+
+    skip 'fetches hint', :vcr do
+      subject
+      expect(controller.show_hint?).to be_truthy
+      expect(controller).to_not receive :on_hint_fetch_error
+      expect(controller).to receive(:on_hint_fetch_update).ordered
+      expect(controller).to receive(:on_hint_fetch_complete).ordered
+      Timeout::timeout(240) {
+        sleep 1 while controller.loading_hint?
+      }
+      expect(controller.hint).to be_truthy
     end
   end
 end

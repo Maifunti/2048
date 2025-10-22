@@ -12,6 +12,7 @@ module Twenty48
       # We're using both curses keypad codes and ascii ctrl characters
       BACKSPACE = [Curses::KEY_BACKSPACE, 8]
       ENTER = [Curses::KEY_ENTER, 13, 10, $/]
+      ESCAPE = [27]
       LEFT = [Curses::KEY_LEFT]
       RIGHT = [Curses::KEY_RIGHT]
       DOWN = [Curses::KEY_DOWN]
@@ -47,7 +48,6 @@ module Twenty48
             break if y + row_index > height
             next if line.empty?
 
-            # puts y + row_index
             line_buffer = display_buffer[y + row_index]
             break unless line_buffer
 
@@ -109,22 +109,24 @@ module Twenty48
             case code
             when Curses::KEY_RESIZE
               initialize_window
+            when *ESCAPE
+              callback_listener.schedule(UserInput.control_sequence(:escape))
             when *ENTER
-              callback_listener.schedule_command(editor.pop_input)
+              callback_listener.schedule(UserInput.command(editor.pop_input))
             when /[ -~]/ # matches all printable ascii characters
               editor.append(code) unless editor.size > 0
             when *LEFT
               editor.append '←'
-              callback_listener.schedule_command editor.pop_input if editor.size == 1
+              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
             when *RIGHT
               editor.append '→'
-              callback_listener.schedule_command editor.pop_input if editor.size == 1
+              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
             when *DOWN
               editor.append '↓'
-              callback_listener.schedule_command editor.pop_input if editor.size == 1
+              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
             when *UP
               editor.append '↑'
-              callback_listener.schedule_command editor.pop_input if editor.size == 1
+              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
             when *BACKSPACE
               editor.backspace
             when nil

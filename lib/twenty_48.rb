@@ -14,7 +14,7 @@ module Twenty48
   BOARD_CELL_X_COUNT = 4
   BOARD_CELL_Y_COUNT = 4
   BORDER_AND_PADDING = 1
-  DISPLAY_WIDTH = 45
+  DISPLAY_WIDTH = 55
   DISPLAY_HEIGHT = 36
   COMMAND_LINE_USAGE = <<~QUOTE
     \n\nUSAGE\n\n
@@ -34,7 +34,7 @@ module Twenty48
     ←               Left
     →               Right
     U <⏎>           Undo
-    N <⏎>            New
+    N <⏎>           New
     Q <⏎>           Quit
 
   QUOTE
