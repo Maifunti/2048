@@ -110,21 +110,21 @@ module Twenty48
             when Curses::KEY_RESIZE
               initialize_window
             when *ENTER
-              callback_listener.schedule(UserInput.command(editor.pop_input))
+              callback_listener.schedule_command(editor.pop_input)
             when /[ -~]/ # matches all printable ascii characters
               editor.append(code) unless editor.size > 0
             when *LEFT
               editor.append '←'
-              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
+              callback_listener.schedule_command editor.pop_input if editor.size == 1
             when *RIGHT
               editor.append '→'
-              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
+              callback_listener.schedule_command editor.pop_input if editor.size == 1
             when *DOWN
               editor.append '↓'
-              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
+              callback_listener.schedule_command editor.pop_input if editor.size == 1
             when *UP
               editor.append '↑'
-              callback_listener.schedule UserInput.command(editor.pop_input) if editor.size == 1
+              callback_listener.schedule_command editor.pop_input if editor.size == 1
             when *BACKSPACE
               editor.backspace
             when nil
