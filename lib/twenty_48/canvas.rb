@@ -23,7 +23,7 @@ module Twenty48
     def set_value(x, y, char)
       raise 'char length is greater than 1' if char.length > 1
 
-      data[y][x] = char
+      data[y][x] = char if data[y]
     end
 
     def inside?(x, y)

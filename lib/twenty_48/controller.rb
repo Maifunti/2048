@@ -8,6 +8,8 @@ module Twenty48
     PLAYING = 'PLAYING'
     VICTORY = 'VICTORY'
     DEFEAT = 'DEFEAT'
+    LOADING_HINT = 'LOADING_HINT'
+
     DEFAULT_HINT = 'No AI agent configured'
 
     class Result
@@ -48,14 +50,15 @@ module Twenty48
       end
     end
 
-    attr_accessor :history, :board_state, :status, :disable_cell_generation, :ai_engine
+    attr_accessor :history, :board_state, :status, :disable_cell_generation, :ai_client_klass, :ai_engine, :listener, :hint
 
-    def initialize(initial_state: nil, ai_engine: nil, disable_cell_generation: false)
+    def initialize(listener, initial_state: nil, ai_client_klass: Client::KimiAi, disable_cell_generation: false)
       total_cell_count = BOARD_CELL_X_COUNT * BOARD_CELL_Y_COUNT
       self.history = []
       self.disable_cell_generation = disable_cell_generation
       self.status = PLAYING
-      self.ai_engine = ai_engine
+      self.listener = listener
+      self.ai_client_klass = ai_client_klass
 
       if initial_state
         self.board_state = initial_state
@@ -67,14 +70,67 @@ module Twenty48
       detect_end_game
     end
 
-    # @param [String] user_input
+    # @param [UserInput::Command|UserInput::Control] user_input
     # @return [Result]
     def process(user_input)
-      command = user_input.to_s.strip
+      if user_input.is_a? UserInput::Command
+        process_command user_input
+      elsif user_input.is_a? UserInput::Control
+        process_control user_input
+      else
+        raise 'unknown user input class'
+      end
+    end
+
+    def on_hint_fetch_update(updated_hint)
+      self.hint = updated_hint
+      listener.invalidate
+    end
+
+    def on_hint_fetch_complete(completed_hint)
+      self.hint = completed_hint
+      self.ai_engine = nil
+      listener.invalidate
+    end
+
+    def on_hint_fetch_error(_error)
+      ai_engine.abort
+      self.ai_engine = nil
+      listener.invalidate
+    end
+
+    def loading_hint?
+      !!ai_engine
+    end
+
+    def show_hint?
+      ai_engine || hint
+    end
+
+    private
+
+    def process_control(user_input)
+      case user_input.value
+      when :escape
+        if ai_engine
+          ai_engine.abort
+          self.ai_engine = nil
+        elsif hint
+          self.hint = nil
+        end
+      else
+        #no-op
+      end
+    end
+
+    def process_command(user_input)
+      command = user_input.value.to_s.strip
       return Result.new(nil, nil).for_failure("Bad Input") unless command
 
       command = command.upcase
       result = Result.new(command)
+
+      return if ai_engine # command cannot be processed while ai_engine is fetching
 
       case command
       when '↑'
@@ -90,7 +146,7 @@ module Twenty48
       when 'N'
         new_board
       when 'H'
-        return result.for_hint(hint)
+        self.ai_engine = AiEngine.fetch board_state, self
       when 'Q'
         # App will exit
       else
@@ -99,8 +155,6 @@ module Twenty48
 
       result.for_success
     end
-
-    private
 
     def move
       old_state = board_state.dup
@@ -357,11 +411,6 @@ module Twenty48
       else
         self.status = DEFEAT
       end
-    end
-
-    def hint
-      message = ai_engine ? ai_engine.generate_hint(board_state) : DEFAULT_HINT
-      "HINT: #{message}"
     end
   end
 end

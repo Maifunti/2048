@@ -29,6 +29,12 @@ Gem::Specification.new do |spec|
   spec.add_dependency('tty-reader', '~> 0.9')
   spec.add_dependency('tty-screen', '~> 0.8')
   spec.add_dependency('httparty', '~> 0.23')
+  spec.add_dependency('curses')
+  spec.add_dependency('mutex_m')
+  spec.add_dependency('ostruct')
+  spec.add_dependency('readline')
   spec.add_dependency('zeitwerk')
   spec.add_dependency('concurrent-ruby')
+  spec.add_dependency('ld-eventsource')
+  spec.add_dependency('justify')
 end
