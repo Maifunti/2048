@@ -36,5 +36,4 @@ Gem::Specification.new do |spec|
   spec.add_dependency('zeitwerk')
   spec.add_dependency('concurrent-ruby')
   spec.add_dependency('ld-eventsource')
-  spec.add_dependency('justify')
 end

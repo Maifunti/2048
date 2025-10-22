@@ -93,9 +93,9 @@ module Twenty48
       listener.invalidate
     end
 
-    def on_hint_fetch_error(_error)
-      ai_engine.abort
-      self.ai_engine = nil
+    def on_hint_fetch_error(completed_hint)
+      self.hint = completed_hint
+      ai_engine&.abort
       listener.invalidate
     end
 

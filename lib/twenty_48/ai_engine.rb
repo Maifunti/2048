@@ -31,11 +31,11 @@ module Twenty48
         callback.on_hint_fetch_update hint
       end
 
-      on_error = lambda do |error|
+      on_error = lambda do |error_message|
         return if @aborted
 
         self.hint << "\n\nError fetching data\n\n"
-        self.hint << error.inspect
+        self.hint << error_message
         callback.on_hint_fetch_error hint
       end
 

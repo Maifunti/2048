@@ -15,6 +15,11 @@ module Twenty48
     MAX_TOKENS = 2048
 
     def create(system, user, update:, complete:, error:)
+      if !ENV['MOONSHOT_AI_API_KEY']
+        error.call("Please export a valid MOONSHOT_AI_API_KEY")
+        return
+      end
+
       payload = {
         model: MODEL,
         messages: [
@@ -41,7 +46,7 @@ module Twenty48
         end
 
         client.on_error do |e|
-          error.call(e)
+          error.call(e.message)
         end
       end
     end

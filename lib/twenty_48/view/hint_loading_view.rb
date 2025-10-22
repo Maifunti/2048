@@ -1,5 +1,3 @@
-require 'justify'
-
 module Twenty48
   module View
     class HintLoadingView
@@ -33,8 +31,9 @@ module Twenty48
         text_top = y_pos + PADDING
 
         max_height = height - (PADDING * 2)
+        max_width = width - (PADDING * 2) - 2
 
-        formatted_hint = hint.to_s.justify(28)
+        formatted_hint = Utils::String.wrap(hint.to_s, max_width)
         truncated_hint = formatted_hint.lines.last(max_height).join
 
         Draw::PaintText.print(canvas, text_left, text_top, truncated_hint)
