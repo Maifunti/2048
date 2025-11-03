@@ -1,13 +1,3 @@
-# Message for evaluator
-I used the Kimi thinking model because that's the only agent I can buy credits for in Hong kong.
-Don't forget to export the `MOONSHOT_AI_API_KEY` if you want to use AI hints 
-
-Files of interest:
-- lib/twenty_48/app.rb -- entry point
-- lib/twenty_48/controller.rb -- game controller
-- lib/twenty_48/ai_engine.rb -- engine for generating AI hints
-- lib/twenty_48/view/board_view.rb -- renders the game board
-
 # Simple setup using docker
 ```
   docker build -t yakubu-lamay-2048 .
